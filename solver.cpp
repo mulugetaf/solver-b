@@ -1,17 +1,11 @@
 
 #include <complex>
-#include <stdbool.h>
 #include <cmath>
-#include <typeinfo>
-#include <string>
 #include <stdexcept>
 #include "solver.hpp"
 
 using namespace std;
 using namespace solver;
-/*source : https://www.programiz.com/cpp-programming/examples/quadratic-roots
-        :https://fahad-cprogramming.blogspot.com/2017/07/complex-numbers-class-cpp-example.html */
-
 /*RealVariable constructor*/
 RealVariable::RealVariable()
 {
@@ -747,7 +741,7 @@ double solver::solve(RealVariable &r)
         {
             r.root2 = (-b + sqrt(discriminant)) / (2 * a);
         }
-        // roo1 and roo2 is complex
+        // roo1 and roo2 are complex
         else
         {
             throw std::invalid_argument("no solution");

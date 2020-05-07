@@ -1,7 +1,5 @@
 #include <iostream>
 #include <complex>
-#include <stdbool.h>
-#include <vector>
 
 using namespace std;
 namespace solver
