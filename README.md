@@ -23,6 +23,7 @@
 *For a quadratic equation ax2+bx+c = 0 (where a, b and c are coefficients), it's roots is 
 	-given by following the formula.
  :![](roots-quadratic-equation.jpg)
+ 
 *The term b2-4ac is known as the discriminant of a quadratic equation. 
 *The discriminant tells the nature of the roots.
 
