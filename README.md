@@ -15,14 +15,17 @@
 
 </div>
 </div>
-##Built With
+
 * [Reference source](https://www.programiz.com/cpp-programming/examples/quadratic-roots)
+
 * [Reference source](https://fahad-cprogramming.blogspot.com/2017/07/complex-numbers-class-cpp-example.html)
 
 *For a quadratic equation ax2+bx+c = 0 (where a, b and c are coefficients), it's roots is 
-	given by following the formula.
+	-given by following the formula.
+	
 	:![](roots-quadratic-equation.jpg)
-The term b2-4ac is known as the discriminant of a quadratic equation. The discriminant tells the nature of the roots.
+*The term b2-4ac is known as the discriminant of a quadratic equation. 
+*The discriminant tells the nature of the roots.
 
 *If discriminant is greater than 0, the roots are real and different.
 *If discriminant is equal to 0, the roots are real and equal.
