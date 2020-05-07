@@ -9,8 +9,10 @@
 
 using namespace std;
 using namespace solver;
-//source : https://www.programiz.com/cpp-programming/examples/quadratic-roots
-//        :https://fahad-cprogramming.blogspot.com/2017/07/complex-numbers-class-cpp-example.html
+/*source : https://www.programiz.com/cpp-programming/examples/quadratic-roots
+        :https://fahad-cprogramming.blogspot.com/2017/07/complex-numbers-class-cpp-example.html */
+
+/*RealVariable constructor*/
 RealVariable::RealVariable()
 {
     a = 0;
@@ -18,6 +20,7 @@ RealVariable::RealVariable()
     c = 0;
     n = 1;
 }
+/*ComplexVariable constructor*/
 ComplexVariable::ComplexVariable()
 {
     a = 0;
@@ -26,7 +29,9 @@ ComplexVariable::ComplexVariable()
     realPart = ans.real();
     imaginaryPart = ans.imag();
 }
-/*ComplexVariable constructor*/
+/*LinearEquation
+          return:x value of linear equation
+          by using -(c/b) */
 double solver::LinearEquation(solver::RealVariable &equation)
 {
     double ans = -(equation.c / equation.b);
@@ -205,9 +210,10 @@ RealVariable &solver::operator/(const solver::RealVariable &r, int x)
 RealVariable &solver::operator^(const solver::RealVariable &r, int x)
 {
     RealVariable *ans = new RealVariable();
+    /* x^n |   0 < n < 3    */
     if ((x < 1) || (x > 2))
     {
-        throw std::invalid_argument("->>>>>");
+        throw std::invalid_argument("unlegal equation");
     }
     ans->a = 1;
     ans->b = 0;
@@ -400,7 +406,6 @@ ComplexVariable &solver::operator==(const solver::ComplexVariable &c1, const sol
         ans->imaginaryPart += -c2.imaginaryPart;
     }
     return *ans;
-    
 };
 /* 
         overload operator  <=          
@@ -492,9 +497,10 @@ ComplexVariable &solver::operator/(const solver::ComplexVariable &r, int x)
 ComplexVariable &solver::operator^(const solver::ComplexVariable &r, int x)
 {
     ComplexVariable *ans = new ComplexVariable();
+    /* x^n |   0 < n < 3    */
     if ((x < 1) || (x > 2))
     {
-        throw std::invalid_argument("->>>>>");
+        throw std::invalid_argument("unlegal equation");
     }
     ans->a = 1;
     ans->b = 0;
@@ -674,6 +680,7 @@ ComplexVariable &solver::operator+(std::complex<double> &t, int x)
     */
 ComplexVariable &solver::operator+(std::complex<double> &t, const solver::ComplexVariable &r)
 {
+    //need to implement
     ComplexVariable *ans = new ComplexVariable();
     return *ans;
 };
@@ -719,8 +726,8 @@ ComplexVariable &solver::operator*(std::complex<double> &t, double x)
 }
 /* 
     solve function
-    return : complex<double>
-           :double
+    return : double root1 or root2
+    source : https://www.programiz.com/cpp-programming/examples/quadratic-roots
     */
 double solver::solve(RealVariable &r)
 {
@@ -740,32 +747,48 @@ double solver::solve(RealVariable &r)
         {
             r.root2 = (-b + sqrt(discriminant)) / (2 * a);
         }
+        // roo1 and roo2 is complex
         else
         {
             throw std::invalid_argument("no solution");
         }
         return r.root1;
     }
+    // if given equation is linear
     else if (r.n == 1)
     {
         return LinearEquation(r);
     }
+    /*if given equation is not square or linear 
+    throw exception
+    */
     else
     {
         throw std::invalid_argument("unlegal");
     }
 };
+/* 
+    solve function
+    return : complex<double>  (realPart , imaginaryPart)
+    source : https://www.programiz.com/cpp-programming/examples/quadratic-roots
+           : https://fahad-cprogramming.blogspot.com/2017/07/complex-numbers-class-cpp-example.html 
+    */
 std::complex<double> solver::solve(ComplexVariable &c)
 {
     double a1 = c.a;
     double b1 = c.b;
     double c1 = c.c;
     double discriminant = b1 * b1 - 4 * a1 * c1;
-    if (c.imaginaryPart != 0)
+    /*
+    if given equation is :  a + yi = b + xi
+    then it return (c.realPart, c.imaginaryPart);
+    source : https://www.mathsisfun.com/algebra/complex-number-multiply.html
+    */
+    if (c.imaginaryPart != 0 || c.realPart != 0)
     {
         return std::complex<double>(c.realPart, c.imaginaryPart);
     }
-    if (c.n > 1 && c.n < 3)
+    if (c.n == 2)
     {
         if (discriminant > 0)
         {
@@ -775,11 +798,13 @@ std::complex<double> solver::solve(ComplexVariable &c)
         {
             return std::complex<double>((-b1 + sqrt(discriminant)) / (2 * a1), 0.0);
         }
+
         else
         {
             return std::complex<double>(-b1 / (2 * a1), sqrt(-discriminant) / (2 * a1));
         }
     }
+    //linear equation
     else
     {
         double a = -(c1 / b1);
@@ -787,7 +812,10 @@ std::complex<double> solver::solve(ComplexVariable &c)
             throw std::invalid_argument("no solution");
         return std::complex<double>(a, 0);
     }
-    throw std::invalid_argument("unlegal");
+    /*if given equation power is gretter then 2 or less then 1
+    will throw "unlegal eqution" exception
+    */
+    throw std::invalid_argument("unlegal equation");
 };
 std::ostream &solver::operator<<(std::ostream &o, const solver::RealVariable &s)
 {

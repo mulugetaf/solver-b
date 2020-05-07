@@ -8,7 +8,9 @@ namespace solver
 {
   /*
     class RealVariable
-    x1 ,x2 result of square equation
+    root1 ,root2 result of square equation
+    n = power of current x value
+    ax^2 +bx + c = 0
  */
   class RealVariable
   {
@@ -79,14 +81,14 @@ namespace solver
     class ComplexVariable
     ans result of square equation(complex).
     ans : (real , imag).
-    real:  real part of the complex number.
-    imag:  imaginary part of the complex number.
+    realPart:  real part of the complex number.
+    imaginaryPart:  imaginary part of the complex number.
+    discriminant = b*b - 4*a*c;
  */
   class ComplexVariable
   {
   public:
     std::complex<double> ans;
-  //  std::complex<double> ans2;
     double a, b, c, discriminant,realPart, imaginaryPart;;
     int n = 1;
     //constructor
